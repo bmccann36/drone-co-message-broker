@@ -1,0 +1,59 @@
+{
+  "body": "{\"messageContentId\":\"101\",\"recipientIds\":{\"messageContentId\":\"101\",\"recipientIds\":[\"e0ba4fcf-e8ff-448d-8315-8b680883a63a\",\"da140789-b1b8-4d51-8375-4c740d3555fb\",\"1344c9a2-cae5-4c78-9777-08367e3b064f\",\"3a146614-99ad-446e-93b9-11430952aab9\",\"0f4da6b4-37e1-438d-bb86-f48f537455dd\",\"036fde15-4401-4000-92c8-33aba37d2744\",\"134d700e-f524-4093-95c0-1e09d0e47f6b\",\"2fd2e9ab-ad7a-42ac-a7e9-5e3c7373bf14\",\"fb1326a6-b78e-48bf-9ba9-99a69594969e\",\"302345e6-5267-4e55-b2ad-b982f4fdc12d\"]}}",
+  "headers": {
+    "Accept": "application/json, text/plain, */*",
+    "Content-Type": "application/json;charset=utf-8",
+    "User-Agent": "axios/0.19.2",
+    "Content-Length": "475",
+    "Host": "localhost:3000",
+    "Connection": "close"
+  },
+  "httpMethod": "POST",
+  "isBase64Encoded": false,
+  "multiValueHeaders": {
+    "Accept": ["application/json, text/plain, */*"],
+    "Content-Type": ["application/json;charset=utf-8"],
+    "User-Agent": ["axios/0.19.2"],
+    "Content-Length": ["475"],
+    "Host": ["localhost:3000"],
+    "Connection": ["close"]
+  },
+  "multiValueQueryStringParameters": null,
+  "path": "/messageContent",
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "requestContext": {
+    "accountId": "offlineContext_accountId",
+    "apiId": "offlineContext_apiId",
+    "authorizer": { "principalId": "offlineContext_authorizer_principalId" },
+    "domainName": "offlineContext_domainName",
+    "domainPrefix": "offlineContext_domainPrefix",
+    "extendedRequestId": "ck9h3d86g0000ej9z52aw9ffd",
+    "httpMethod": "POST",
+    "identity": {
+      "accessKey": null,
+      "accountId": "offlineContext_accountId",
+      "apiKey": "offlineContext_apiKey",
+      "caller": "offlineContext_caller",
+      "cognitoAuthenticationProvider": "offlineContext_cognitoAuthenticationProvider",
+      "cognitoAuthenticationType": "offlineContext_cognitoAuthenticationType",
+      "cognitoIdentityId": "offlineContext_cognitoIdentityId",
+      "cognitoIdentityPoolId": "offlineContext_cognitoIdentityPoolId",
+      "principalOrgId": null,
+      "sourceIp": "127.0.0.1",
+      "user": "offlineContext_user",
+      "userAgent": "axios/0.19.2",
+      "userArn": "offlineContext_userArn"
+    },
+    "path": "/dev/messageContent",
+    "protocol": "HTTP/1.1",
+    "requestId": "ck9h3d86g0001ej9zadcxh711",
+    "requestTime": "26/Apr/2020:09:31:43 -0400",
+    "requestTimeEpoch": 1587907903901,
+    "resourceId": "offlineContext_resourceId",
+    "resourcePath": "/messageContent",
+    "stage": "dev"
+  },
+  "resource": "/messageContent",
+  "stageVariables": null
+}

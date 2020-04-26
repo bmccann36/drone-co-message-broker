@@ -1,0 +1,25 @@
+{
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+
+  },
+  "parser": "babel-eslint",
+  "globals": {
+    "chrome": true
+  },
+  "plugins": ["mocha"],
+  "rules": {
+    "no-console": 0,
+    "no-empty": [
+      1,
+      {
+        "allowEmptyCatch": true
+      }
+    ]
+  },
+  "extends": [
+    "eslint:recommended"
+  ]
+}
