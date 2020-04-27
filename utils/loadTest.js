@@ -7,17 +7,12 @@ for (let i = 0; i < 10000; i++) {
   userIds.push(uuid());
 }
 
-console.log(JSON.stringify(userIds.slice(0,10)));
+const GATEWAY_URL =
+  "https://828jc96lqg.execute-api.us-east-1.amazonaws.com/dev/messageContent";
 
-// const GATEWAY_URL =
-//   "https://828jc96lqg.execute-api.us-east-1.amazonaws.com/dev/messageContent";
-const GATEWAY_URL = "http://localhost:3000/dev/messageContent"
+// const GATEWAY_URL = "http://localhost:3000/dev/messageContent"
 
-// callEp({
-//   messageContentId: "101",
-//   recipientIds: userIds.slice(0,10),
-// }).then((res) => console.log(res.data));
-
+callEp(userIds).then((res) => console.log(res.data));
 
 function callEp(listOfIds) {
   const fakeInput = {

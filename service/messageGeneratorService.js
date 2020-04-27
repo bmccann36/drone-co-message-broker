@@ -1,13 +1,11 @@
 
-
 module.exports = class MessageGeneratorService {
-  docClient;
   constructor(docClient) {
     this.docClient = docClient;
     this.tableName = process.env.MSG_MAPPING_TABLE;
   }
 
-  registerMessages(messageContentId, recipientIds) {
+  async registerMessages(messageContentId, recipientIds) {
 
     const pendingWrites = [];
     for (let i = 0; i < recipientIds.length; i = i + 25) {

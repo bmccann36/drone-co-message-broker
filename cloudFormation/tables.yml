@@ -1,0 +1,27 @@
+Resources:
+  MessageContent:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      TableName: MessageContent
+      AttributeDefinitions:
+        - AttributeName: contentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: contentId
+          KeyType: HASH
+
+  MessageMapping:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PROVISIONED
+      ProvisionedThroughput: 
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 10000
+      TableName: MessageMapping
+      AttributeDefinitions:
+        - AttributeName: recipientId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: recipientId
+          KeyType: HASH
