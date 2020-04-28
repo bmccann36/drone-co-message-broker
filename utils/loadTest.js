@@ -12,7 +12,7 @@ const GATEWAY_URL =
 
 // const GATEWAY_URL = "http://localhost:3000/dev/messageContent"
 
-callEp(userIds).then((res) => console.log(res.data));
+callEp(userIds.slice(0,10)).then((res) => console.log(res.data));
 
 function callEp(listOfIds) {
   const fakeInput = {

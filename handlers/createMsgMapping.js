@@ -1,28 +1,25 @@
-
 const MessageGeneratorService = require("../service/messageGeneratorService");
 const Dyanmo = require("aws-sdk/clients/dynamodb");
+const response = require('../model/response')
 
 const messageGeneratorService = new MessageGeneratorService(
   new Dyanmo.DocumentClient(),
 );
 
-exports.main = async function (event, context) {
+exports.main = async function (event) {
+  let numProcessed = 0;
+
   const body = JSON.parse(event.body);
-  const dynamoRes = await messageGeneratorService.registerMessages(
+  await messageGeneratorService.registerMessages(
     body.messageContentId,
     body.recipientIds,
   );
-  // console.log(dynamoRes);
+  numProcessed = body.recipientIds.length;
 
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-  };
-  // Return status code 200 and the newly created item
-  const response = {
-    statusCode: 200,
-    headers: headers,
-    body: JSON.stringify({ all: "done" }),
-  };
-
-  return response;
+  return response.getSuccessRes(
+    `registered ${numProcessed} user to message associations`,
+  );
 };
+
+
+

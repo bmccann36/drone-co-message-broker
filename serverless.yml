@@ -24,7 +24,15 @@ functions:
     handler: handlers/createMsgMapping.main
     events:
       - http:
-          path: messageContent
+          path: mapping
+          method: post
+          cors: true
+
+  createMsgContent:
+    handler: handlers/createMsgContent.main
+    events:
+      - http:
+          path: content
           method: post
           cors: true
 

@@ -3,7 +3,6 @@
     "node": true,
     "es6": true,
     "mocha": true
-
   },
   "parser": "babel-eslint",
   "globals": {
@@ -12,6 +11,7 @@
   "plugins": ["mocha"],
   "rules": {
     "no-console": 0,
+    "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
     "no-empty": [
       1,
       {
@@ -19,7 +19,5 @@
       }
     ]
   },
-  "extends": [
-    "eslint:recommended"
-  ]
+  "extends": ["eslint:recommended"]
 }
