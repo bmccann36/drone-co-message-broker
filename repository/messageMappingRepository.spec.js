@@ -1,5 +1,5 @@
 require('dotenv').config()
-const MsgGenSvc = require("./messageGeneratorService");
+const MsgGenSvc = require("./messageMappingRepository");
 const Dynamo = require("aws-sdk/clients/dynamodb");
 
 const docClient = new Dynamo.DocumentClient();

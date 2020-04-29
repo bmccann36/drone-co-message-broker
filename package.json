@@ -5,8 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:watch": "nodemon --ext js --exec npm run start-server",
-    "start-server": "serverless offline start"
+    "start:watch": "nodemon --ext js --exec npm run localserver",
+    "localserver": "serverless offline --env local"
   },
   "keywords": [],
   "author": "",

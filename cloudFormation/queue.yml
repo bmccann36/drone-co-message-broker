@@ -1,0 +1,5 @@
+Resources:
+  SqsQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: drone-co-queue

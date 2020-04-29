@@ -13,3 +13,10 @@
 ### getting started
 
 run locally with sls offline
+
+
+### running api locally
+sls offline --env local
+`--env` needed
+
+### deploying

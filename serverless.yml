@@ -8,10 +8,15 @@ provider:
   role: MsgBrokerServiceRole
 # you can overwrite defaults here
 # region: us-east-1
+  environment:
+    QUEUE_URL : { "Ref" : "SqsQueue" }
+    MSG_MAPPING_TABLE: { "Ref": "MessageMapping" }
+    CONTENT_TABLE: { "Ref": "MessageContent" }
+
 
 plugins:
   - serverless-offline
-  - serverless-dotenv-plugin
+  - serverless-dotenv-plugin # only for local testing
 
 package: 
   include: # Specify the directories and files which should be included in the deployment package
@@ -53,4 +58,5 @@ functions:
 resources:
   - ${file(./cloudFormation/iamRole.yml)}
   - ${file(./cloudFormation/tables.yml)}
+  - ${file(./cloudFormation/queue.yml)}
 

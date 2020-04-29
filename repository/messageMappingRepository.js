@@ -1,5 +1,5 @@
 
-module.exports = class MessageGeneratorService {
+module.exports = class MessageMappingRepository {
   constructor(docClient) {
     this.docClient = docClient;
     this.tableName = process.env.MSG_MAPPING_TABLE;
