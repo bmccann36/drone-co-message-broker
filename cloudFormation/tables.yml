@@ -17,11 +17,15 @@ Resources:
       BillingMode: PROVISIONED
       ProvisionedThroughput: 
           ReadCapacityUnits: 5
-          WriteCapacityUnits: 10000
+          WriteCapacityUnits: 5
       TableName: MessageMapping
       AttributeDefinitions:
         - AttributeName: recipientId
           AttributeType: S
+        - AttributeName: contentId
+          AttributeType: S
       KeySchema:
         - AttributeName: recipientId
           KeyType: HASH
+        - AttributeName: contentId
+          KeyType: RANGE

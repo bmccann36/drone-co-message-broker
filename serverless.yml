@@ -35,6 +35,19 @@ functions:
           path: content
           method: post
           cors: true
+  
+  getUserMessages:
+    handler: handlers/getUserMessages.main
+    events:
+      - http:
+          path: messages/{id} 
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                id: true
+
 
 # this is where you include raw cloud formation
 resources:
