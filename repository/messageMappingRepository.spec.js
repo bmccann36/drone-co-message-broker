@@ -1,11 +1,13 @@
-require('dotenv').config()
+const path = require('path');
+const envPath = path.join(process.cwd(), "..", ".env.local");
+require('dotenv').config({ path: envPath });
 const MsgGenSvc = require("./messageMappingRepository");
 const Dynamo = require("aws-sdk/clients/dynamodb");
 
 const docClient = new Dynamo.DocumentClient();
 const target = new MsgGenSvc(docClient);
 
-describe("some thing", function () {
+describe("#messageMappingRepository", function () {
   it("registers messages", function () {
     const mockPayload = getMockInput();
 
@@ -14,7 +16,21 @@ describe("some thing", function () {
       mockPayload.recipientIds,
     );
   });
+  it("registers messages from queue", async () => {
+    const mockQueueInput = getMockQueueInput();
+    const res = await target.registerQueueMessages(mockQueueInput);
+    // console.log(res);
+  })
 });
+
+function getMockQueueInput() {
+  const returnList = [];
+  for (let i = 0; i < 50; i++) {
+    const messageMapping = { contentId: "100", recipientId: i + "" };
+    returnList.push(messageMapping);
+  }
+  return returnList;
+}
 
 function getMockInput() {
   return {

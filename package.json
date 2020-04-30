@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.663.0"
+    "aws-sdk": "^2.663.0",
+    "uuidv4": "^6.0.7"
   },
   "devDependencies": {
     "axios": "^0.19.2",
@@ -23,7 +24,6 @@
     "mocha": "^7.1.2",
     "object-sizeof": "^1.6.0",
     "serverless-dotenv-plugin": "^2.4.2",
-    "serverless-offline": "^6.1.4",
-    "uuidv4": "^6.0.7"
+    "serverless-offline": "^6.1.4"
   }
 }

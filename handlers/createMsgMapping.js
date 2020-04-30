@@ -21,11 +21,14 @@ exports.main = async function (event) {
       body.messageContentId,
       body.recipientIds,
     );
+  } else {
+    console.log("writing messages direct to dynamoDB");
+    await messageMappingRepository.registerMessages(
+      body.messageContentId,
+      body.recipientIds,
+    );
   }
-  // await messageMappingRepository.registerMessages(
-  //   body.messageContentId,
-  //   body.recipientIds,
-  // );
+
   numProcessed = body.recipientIds.length;
 
   return response.getSuccessRes(

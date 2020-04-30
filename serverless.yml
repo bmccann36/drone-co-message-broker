@@ -53,7 +53,14 @@ functions:
               paths:
                 id: true
 
-
+  handleQueueEvents:
+    handler: handlers/handleQueueEvents.main
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - SqsQueue
+              - Arn
 # this is where you include raw cloud formation
 resources:
   - ${file(./cloudFormation/iamRole.yml)}
