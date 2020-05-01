@@ -63,7 +63,7 @@ module.exports = class ContentRepository {
 
   putMessageContent(msgContent) {
     const params = {
-      contentTableName: this.contentTableName,
+      TableName: this.contentTableName,
       Item: msgContent,
     };
     return this.docClient.put(params).promise();
