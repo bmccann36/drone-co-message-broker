@@ -3,7 +3,8 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       BillingMode: PAY_PER_REQUEST
-      TableName: MessageContent
+      # if commented out tableName will be generated
+      # TableName: MessageContent 
       AttributeDefinitions:
         - AttributeName: contentId
           AttributeType: S
@@ -14,11 +15,8 @@ Resources:
   MessageMapping:
     Type: AWS::DynamoDB::Table
     Properties:
-      BillingMode: PROVISIONED
-      ProvisionedThroughput: 
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
-      TableName: MessageMapping
+      BillingMode: PAY_PER_REQUEST
+      # TableName: MessageMapping
       AttributeDefinitions:
         - AttributeName: recipientId
           AttributeType: S

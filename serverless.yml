@@ -16,13 +16,13 @@ provider:
 
 plugins:
   - serverless-offline
-  - serverless-dotenv-plugin # only for local testing
+  - serverless-dotenv-plugin # pass flags to sls commands to specify which .env to use (.env is default) see npm docs for more
 
 package: 
   include: # Specify the directories and files which should be included in the deployment package
   exclude: 
     - .git/**
-    - node_modules/aws-sdk # so that aws-sdk and all its dependencies are ignored
+    - node_modules/aws-sdk # so that aws-sdk and all its dependencies are ignored. Lambda comes pre loaded with the sdk
 
 functions:
   createMsgMapping:

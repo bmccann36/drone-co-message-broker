@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:watch": "nodemon --ext js --exec npm run localserver",
+    "localserver:watch": "nodemon --inspect --ext js --exec npm run localserver",
     "localserver": "serverless offline --env local"
   },
   "keywords": [],

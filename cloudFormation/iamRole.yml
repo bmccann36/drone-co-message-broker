@@ -44,20 +44,9 @@ Resources:
                 Action:
                   - "dynamodb:*"
                 Resource:
-                  - 'Fn::Join': # ! message mapping table
-                    - ':'
-                    -
-                      - 'arn:aws:dynamodb'
-                      - Ref: 'AWS::Region'
-                      - Ref: 'AWS::AccountId'
-                      - 'table/MessageMapping' 
-                  - 'Fn::Join': # ! message content table
-                    - ':'
-                    -
-                      - 'arn:aws:dynamodb'
-                      - Ref: 'AWS::Region'
-                      - Ref: 'AWS::AccountId'
-                      - 'table/MessageContent' 
+                  - Fn::GetAtt: [ MessageContent, Arn ]
+                  - Fn::GetAtt: [ MessageMapping, Arn ]
+
               - Effect: Allow
                 Action:
                   - sqs:ReceiveMessage

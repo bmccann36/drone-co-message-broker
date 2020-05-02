@@ -21,8 +21,9 @@ exports.main = async function (event) {
       body.messageContentId,
       body.recipientIds,
     );
-  } else {
-    console.log("writing messages direct to dynamoDB");
+  }
+  if (process.env.USE_SQS == undefined || process.env.USE_SQS == "false") {
+    console.log("skipping SQS, writing message mappings direct to dynamoDB");
     await messageMappingRepository.registerMessages(
       body.messageContentId,
       body.recipientIds,

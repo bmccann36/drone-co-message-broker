@@ -12,11 +12,15 @@ module.exports = class ContentRepository {
     }
     const responseMap = this.mapDynamoResToResponseMap(dynamoRes);
     const dynamoTemplatesRes = await this.getMessageTemplates(dynamoRes);
+    const responseList = dynamoTemplatesRes.Responses[this.contentTableName];
+    if (responseList.length == 0) {
+      return [];
+    }
     return this.combineMapingWithTemplates(dynamoTemplatesRes, responseMap);
   }
 
   combineMapingWithTemplates(dynamoTemplatesRes, responseMap) {
-    const listOfTemplates = dynamoTemplatesRes.Responses.MessageContent;
+    const listOfTemplates = dynamoTemplatesRes.Responses[this.contentTableName];
 
     listOfTemplates.forEach((template) => {
       const templId = template.contentId;
@@ -56,7 +60,7 @@ module.exports = class ContentRepository {
       ExpressionAttributeValues: {
         ":recipientId": userId,
       },
-      FilterExpression: "attribute_not_exists(msgRead)",
+      FilterExpression: "attribute_not_exists(msgRead)", // ! for future use (no "read" attribute currently)
     };
     return this.docClient.query(params).promise();
   }
