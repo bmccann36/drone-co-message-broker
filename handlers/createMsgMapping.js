@@ -15,7 +15,7 @@ exports.main = async function (event) {
   const body = JSON.parse(event.body);
 
   console.log("USE SQS? ", process.env.USE_SQS);
-  if (process.env.USE_SQS) {
+  if (process.env.USE_SQS && process.env.USE_SQS !== "false") {
     console.log("pushing message mappings to SQS queue");
     await queueService.addMappingsToQueue(
       body.messageContentId,

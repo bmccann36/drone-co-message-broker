@@ -1,5 +1,4 @@
-
-const DynamoDB = require('aws-sdk/clients/dynamodb')
+const DynamoDB = require("aws-sdk/clients/dynamodb");
 const docClient = new DynamoDB.DocumentClient();
 
 // ! WARNING
@@ -23,22 +22,20 @@ sort key is only required if your table has one
 --segments 8
 */
 
-
 const cliArgs = process.argv;
-const tableNameIdx = cliArgs.indexOf('--tableName') + 1;
-const pkIdx = cliArgs.indexOf('--partitionKey') + 1;
-const segmentsIdx = cliArgs.indexOf('--segments') + 1;
-const skIdx = cliArgs.indexOf('--sortKey') + 1;
+const tableNameIdx = cliArgs.indexOf("--tableName") + 1;
+const pkIdx = cliArgs.indexOf("--partitionKey") + 1;
+const segmentsIdx = cliArgs.indexOf("--segments") + 1;
+const skIdx = cliArgs.indexOf("--sortKey") + 1;
 
 if (tableNameIdx === 0 || pkIdx === 0) {
-  throw new Error('you must supply a tablename and a partition key');
+  throw new Error("you must supply a tablename and a partition key");
 }
 
 const TABLE_NAME = cliArgs[tableNameIdx];
 const PK = cliArgs[pkIdx];
 let TOTAL_SEGMENTS = 6;
 let SK = false;
-
 
 if (segmentsIdx) {
   TOTAL_SEGMENTS = +cliArgs[segmentsIdx];
@@ -47,10 +44,10 @@ if (skIdx) {
   SK = cliArgs[skIdx];
 }
 
-console.log('tableName = ', TABLE_NAME);
-console.log('partitionKey = ', PK);
-console.log('sortKey = ', SK);
-console.log('segments = ', TOTAL_SEGMENTS);
+console.log("tableName = ", TABLE_NAME);
+console.log("partitionKey = ", PK);
+console.log("sortKey = ", SK);
+console.log("segments = ", TOTAL_SEGMENTS);
 
 const pendingScans = [];
 initiateParallelThreads();
@@ -63,16 +60,15 @@ async function initiateParallelThreads() {
     pendingScans.push(scanSegment(i, TOTAL_SEGMENTS));
   }
   await Promise.all(pendingScans);
-  console.log('sleeping 2 seconds');
+  console.log("sleeping 2 seconds");
   await sleep(2000);
-  console.log('threads complete checking for remaining items');
+  console.log("threads complete checking for remaining items");
   const itemsExist = await checkForRemaining();
   if (itemsExist) {
-    console.log('restarting to clear out remaining items');
+    console.log("restarting to clear out remaining items");
     initiateParallelThreads();
   }
 }
-
 
 async function scanSegment(segmentNum, totalSegments) {
   let itemsExist = true;
@@ -92,7 +88,7 @@ async function scanSegment(segmentNum, totalSegments) {
     const batch = await docClient.scan(params).promise();
     if (!batch.Items.length) {
       itemsExist = false;
-      console.log('NO MORE ITEMS');
+      console.log("NO MORE ITEMS");
       return segmentItems;
     }
     if (nextStartPoint === batch.LastEvaluatedKey) {
@@ -110,8 +106,8 @@ async function scanSegment(segmentNum, totalSegments) {
 }
 
 function deleteBatch(batch) {
-  console.log('deleting', batch.Items.length)
-  const deleteArr = batch.Items.map(item => {
+  console.log("deleting", batch.Items.length);
+  const deleteArr = batch.Items.map((item) => {
     const deleteReq = {
       DeleteRequest: {
         Key: {
@@ -140,9 +136,7 @@ function deleteBatch(batch) {
       },
     };
     // add to array the delete 25 promise batch
-    pendingBatches.push(
-      docClient.batchWrite(deleteParams).promise(),
-    );
+    pendingBatches.push(docClient.batchWrite(deleteParams).promise());
   }
   return Promise.all(pendingBatches);
 }
@@ -156,7 +150,6 @@ async function checkForRemaining() {
   return !!batch.Items.length;
 }
 
-
 function sleep(milliseconds) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
