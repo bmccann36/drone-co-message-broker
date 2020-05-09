@@ -9,7 +9,12 @@ const messageMappingRepository = new MessageMappingRepository(
 );
 const queueService = new QueueService(new SQS());
 
+const validateEnvVars = require("./validator/validateEnvVars");
+
 exports.main = async function (event) {
+
+  validateEnvVars();
+
   let numProcessed = 0;
 
   const body = JSON.parse(event.body);
