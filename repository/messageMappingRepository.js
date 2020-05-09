@@ -7,7 +7,7 @@ module.exports = class MessageMappingRepository {
 
   async registerQueueMessages(msgArray) {
 
-    const pendingWrites = [];
+    // const pendingWrites = [];
     for (let i = 0; i < msgArray.length; i = i + 25) {
       // construct a delete 25 item promise
       const batchOfMessages = msgArray.slice(i, i + 25);
@@ -16,10 +16,11 @@ module.exports = class MessageMappingRepository {
         this.tableName,
         batchOfMessages,
       );
-      const pendingBatch = this.docClient.batchWrite(formatted).promise();
-      pendingWrites.push(pendingBatch);
+      await this.docClient.batchWrite(formatted).promise(); // ! do synchronously
+      // const pendingBatch = this.docClient.batchWrite(formatted).promise();
+      // pendingWrites.push(pendingBatch);
     }
-    return Promise.all(pendingWrites);
+    // return Promise.all(pendingWrites);
   }
 
   formatMsgBatch(tableName, batch) {

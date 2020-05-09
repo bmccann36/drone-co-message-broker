@@ -31,7 +31,7 @@ module.exports = class ContentRepository {
     });
   }
 
-  getMessageTemplates(dynamoRes) {
+  async getMessageTemplates(dynamoRes) {
     const contentIdKeys = dynamoRes.Items.map((msg) => {
       return { contentId: msg.contentId };
     });
@@ -41,8 +41,12 @@ module.exports = class ContentRepository {
           Keys: contentIdKeys,
         },
       },
+      ReturnConsumedCapacity: "TOTAL"
     };
-    return this.docClient.batchGet(batchGetParams).promise();
+    const res = await this.docClient.batchGet(batchGetParams).promise();
+    console.log("get message templates consumed capacity: ");
+    console.log(res.ConsumedCapacity);
+    return res;
   }
 
   mapDynamoResToResponseMap(dynamoRes) {
@@ -53,7 +57,7 @@ module.exports = class ContentRepository {
     return responseMap;
   }
 
-  getUnreadMsgMappings(userId) {
+  async getUnreadMsgMappings(userId) {
     const params = {
       TableName: this.mappingTableName,
       KeyConditionExpression: "recipientId = :recipientId",
@@ -61,8 +65,12 @@ module.exports = class ContentRepository {
         ":recipientId": userId,
       },
       FilterExpression: "attribute_not_exists(msgRead)", // ! for future use (no "read" attribute currently)
+      ReturnConsumedCapacity: "TOTAL"
     };
-    return this.docClient.query(params).promise();
+    const res = await this.docClient.query(params).promise();
+    console.log("get unread mappings consumed capacity: ");
+    console.log(res.ConsumedCapacity);
+    return res;
   }
 
   putMessageContent(msgContent) {
