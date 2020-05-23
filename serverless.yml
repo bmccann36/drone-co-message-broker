@@ -26,6 +26,7 @@ package:
 
 functions:
   createMsgMapping:
+    timeout: 100 #set high for when we write batches one by one
     handler: handlers/createMsgMapping.main
     events:
       - http:
